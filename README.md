@@ -8,10 +8,6 @@ A package to test linearity assumptions to determine whether a linear regression
 $ pip install linreg_ally
 ```
 
-## Features
-
-1. `run_linear_regression`: This function performs linear regression with preprocessing using sklearn and outputs evaluation scoring metrics.
-
 ## Usage
 
 - TODO
