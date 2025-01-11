@@ -16,7 +16,7 @@ This project delivers a Python package designed to help users determine if Ordin
 
 ## How package fits in Python Ecosystem 
 
-linreg_ally provides an alternative to existing packages like StatAssume (https://pypi.org/project/statsassume/), which automates model fitting, assumptions checking, and dashboard generation in a single function, and lrasm (https://pypi.org/project/lrasm/), which provides specific functions that test certain key assumptions in OLS regression. linreg_ally differentiates itself by providing intuitive, user-friendly functions that guide users through every stage of training an OLS regression model – starting from explanatory data analysis and data preprocessing, progressing to model fitting and evaluating key assumptions in OLS regression. 
+linreg_ally provides an alternative to existing packages like [StatAssume](https://pypi.org/project/statsassume/), which automates model fitting, assumptions checking, and dashboard generation in a single function, and [lrasm](https://pypi.org/project/lrasm/), which provides specific functions that test certain key assumptions in OLS regression. linreg_ally differentiates itself by providing intuitive, user-friendly functions that guide users through every stage of training an OLS regression model – starting from explanatory data analysis and data preprocessing, progressing to model fitting and evaluating key assumptions in OLS regression. 
 
 ## Installation
 
