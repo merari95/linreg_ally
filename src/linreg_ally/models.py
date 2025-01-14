@@ -5,9 +5,9 @@ from sklearn.pipeline import Pipeline
 from sklearn.compose import make_column_transformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import get_scorer
+from sklearn.metrics import get_scorer, get_scorer_names
 
-def run_linear_regression(dataframe, target_column, numeric_feats, categorical_feats, drop_feats=None, test_size=0.2, random_state=None, scoring_metrics=['r2', 'mean_squared_error']):
+def run_linear_regression(dataframe, target_column, numeric_feats, categorical_feats, drop_feats=None, test_size=0.2, random_state=None, scoring_metrics=['r2', 'neg_mean_squared_error']):
     """
     Performs linear regression with preprocessing using sklearn and outputs evaluation scoring metrics.
     
@@ -28,7 +28,7 @@ def run_linear_regression(dataframe, target_column, numeric_feats, categorical_f
     random_state: `int`, optional
         controls the shuffling applied to the data before the split (default None).
     scoring_metrics: `list`, optional
-        scoring metrics to evaluate the model (default 'r2', 'mean_squared_error').
+        scoring metrics to evaluate the model (default 'r2', 'neg_mean_squared_error').
     
     Returns
     -------
@@ -53,11 +53,33 @@ def run_linear_regression(dataframe, target_column, numeric_feats, categorical_f
     >>> categorical_feats = ['category']
     >>> drop_feats = []
     >>> best_model, X_train, X_test, y_train, y_test, scoring_metrics = run_linear_regression(
-    ...     df, target_column, numeric_feats, categorical_feats, drop_feats, metrics=['r2', 'mean_squared_error']
+    ...     df, target_column, numeric_feats, categorical_feats, drop_feats, scoring_metrics=['r2', 'neg_mean_squared_error']
     ... )
     >>> scores
-    {'r2': 0.52, 'mean_squared_error': 1.23}
+    {'r2': 0.52, 'neg_mean_squared_error': 1.23}
     """
+
+    if not isinstance(dataframe, pd.DataFrame):
+        raise Exception("dataframe must be a pandas DataFrame.")
+    
+    if dataframe.shape[1] <= 1:
+        raise Exception("dataframe must contain more than one column.")
+    
+    if target_column not in dataframe.columns:
+        raise Exception(f"target_column '{target_column}' is not in the dataframe.")
+    
+    if not (0.0 < test_size < 1.0):
+        raise Exception("test_size must be between 0.0 and 1.0.")
+    
+    if random_state is not None and not isinstance(random_state, int):
+        raise Exception("random_state must be an integer.")
+    
+    if not isinstance(scoring_metrics, list) or not all(isinstance(metric, str) for metric in scoring_metrics):
+        raise Exception("scoring_metrics must be a list of strings.")
+    
+    if not all(metric in get_scorer_names() for metric in scoring_metrics):
+        invalid_metrics = [metric for metric in scoring_metrics if metric not in get_scorer_names()]
+        raise Exception(f"The following scoring metrics are not valid: {', '.join(invalid_metrics)}")
     
     drop_feats = drop_feats if drop_feats is not None else []
 
