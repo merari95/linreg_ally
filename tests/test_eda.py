@@ -20,7 +20,7 @@ def test_good_data_no_color(iris_data):
     
     # Assert x's are correct
     feature_names = iris_data.columns.tolist()
-    feature_names = feature_names.remove('species')
+    feature_names.remove('species')
     
     feats_used = []
     for i in range(len(plot.concat)):
@@ -37,7 +37,7 @@ def test_good_data_color(iris_data):
 
     # Assert x's are correct
     feature_names = iris_data.columns.tolist()
-    feature_names = feature_names.remove('species')
+    feature_names.remove('species')
 
     feats_used = []
     for i in range(len(plot.concat)):
@@ -47,4 +47,5 @@ def test_good_data_color(iris_data):
         feats_used), 'All x variables are not used!'
 
     # Assert color is `species`
-    assert plot.concat[0].layer[0].color.shorthand == 'species', 'The wrong column is used for coloring!'
+    assert plot.concat[0].layer[0].encoding.color.shorthand == 'species', 'The wrong column is used for coloring!'
+    
