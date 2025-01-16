@@ -106,7 +106,24 @@ def test_incorrect_feat_type(mismatched_type):
     Tests edge case for when the `color` parameter refers
     to a non-object or non-categorical feature
     """
-    pass
+    # Store result
+    plot = eda_summary(mismatched_type, color='binary')
+
+    # Assert output type
+    assert isinstance(plot, alt.ConcatChart), 'Function does not return correct type!'
+
+    # Assert color is 'binary'
+    assert (plot
+            .concat[0]
+            .layer[0]
+            .encoding
+            .color
+            .shorthand == 'binary'), 'The wrong column is used for coloring!'
+
+    # Assert color is nominal type
+    assert (plot.to_dict()['concat'][0]['layer'][0]['encoding']['color']
+            ['type'] == 'nominal'), 'Column dtype conversion failed!'
+
 
 def test_nonexistent_name(mismatched_type):
     """
