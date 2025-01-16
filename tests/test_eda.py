@@ -31,6 +31,27 @@ def mismatched_type():
 
     return mismatched_type
 
+@pytest.fixture
+def empty_df():
+    """
+    Returns empty DataFrame with no data inside
+    """
+    return pd.DataFrame({
+        'x': [],
+        'y': [],
+        'species': []
+    })
+
+@pytest.fixture
+def not_df():
+    """
+    Returns a dictionary instead of a DataFrame
+    """
+    return {
+        'x': [1, 2, 3, 4],
+        'y': [1, 2, 4, 5]
+    }
+
 def test_good_data_no_color(iris_data):
     """
     Test expected use case when given no `color` parameter
@@ -40,11 +61,11 @@ def test_good_data_no_color(iris_data):
 
     # Assert output type
     assert isinstance(plot, alt.ConcatChart), 'Function does not return correct type!'
-    
+
     # Assert x's are correct
     feature_names = iris_data.columns.tolist()
     feature_names.remove('species')
-    
+
     feats_used = []
     for i in range(len(plot.concat)):
         feats_used.append(plot.concat[i].layer[0].encoding.x.shorthand)
@@ -79,7 +100,7 @@ def test_good_data_color(iris_data):
             .encoding
             .color
             .shorthand == 'species'), 'The wrong column is used for coloring!'
-    
+
 def test_incorrect_feat_type(mismatched_type):
     """
     Tests edge case for when the `color` parameter refers
@@ -94,7 +115,7 @@ def test_nonexistent_name(mismatched_type):
     """
     with pytest.raises(KeyError):
         eda_summary(mismatched_type, 'Binary')
-    
+
 def test_empty_df(empty_df):
     """
     Tests edge case for when the DataFrame is empty but has column names
@@ -105,4 +126,17 @@ def test_empty_df(empty_df):
     # Assert output type is correct
     assert isinstance(plot,
                       (alt.Chart, alt.ConcatChart)), 'Function did not return correct type!'
-    
+
+def test_not_df(not_df):
+    """
+    Tests error case for when the input is not a DataFrame
+    """
+    with pytest.raises(TypeError):
+        eda_summary(not_df)
+
+def test_not_str(iris_data):
+    """
+    Tests error case for when the input `color` parameter is not a string
+    """
+    with pytest.raises(TypeError):
+        eda_summary(iris_data, ['species'])
