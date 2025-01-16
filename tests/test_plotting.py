@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 from altair import Chart
 from linreg_ally.plotting import qq_and_residuals_plot
-from plotting import qq_and_residuals_plot
 from altair import HConcatChart
 
 # Unit Tests
