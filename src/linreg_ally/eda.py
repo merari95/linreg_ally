@@ -38,4 +38,10 @@ def eda_summary(train_df: pd.DataFrame, color: str = None) -> alt.ConcatChart:
     >>> summary_chart = eda_summary(train_df, color='y')
     >>> summary_chart.show()        
     """
+    # Run type checks
+    if not isinstance(train_df, pd.DataFrame):
+        raise TypeError(f'train_df needs to be a Pandas DataFrame and not {type(train_df)}')
+    if not isinstance(color, str) and color is not None:
+        raise TypeError(f'color needs to be a string or None and not {type(color)}')
+
     return aly.dist(train_df, color=color)
