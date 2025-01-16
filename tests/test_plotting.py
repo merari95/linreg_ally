@@ -2,10 +2,9 @@ import pytest
 import pandas as pd
 import numpy as np
 from altair import Chart
-import os
-import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src', 'linreg_ally'))
+from linreg_ally.plotting import qq_and_residuals_plot
 from plotting import qq_and_residuals_plot
+from altair import HConcatChart
 
 # Unit Tests
 
@@ -19,7 +18,6 @@ def test_qq_and_residuals_plot_valid_inputs():
 
     # Test with concatenate=True
     result = qq_and_residuals_plot(y_actual, y_predicted, concatenate=True)
-    from altair import HConcatChart  # Import HConcatChart
     assert isinstance(result, (Chart, HConcatChart)), "Expected an Altair Chart or HConcatChart when concatenate=True"
 
     # Test with concatenate=False
