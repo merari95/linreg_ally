@@ -40,7 +40,8 @@ def qq_and_residuals_plot(y_actual, y_predicted, concatenate=True):
     >>> np.random.seed(42)
     >>> y_actual = np.random.normal(10, 2, 100)
     >>> y_predicted = y_actual + np.random.normal(0, 1, 100)
-    >>> qq_and_residuals_plot(y_actual, y_predicted, concatenate=True)
+    >>> chart = qq_and_residuals_plot(y_actual, y_predicted, concatenate=True)
+    >>> chart.display()
     """
     # Ensure inputs are NumPy arrays
     y_actual = np.array(y_actual)
@@ -67,11 +68,20 @@ def qq_and_residuals_plot(y_actual, y_predicted, concatenate=True):
         'Standardized Residuals': qq_sample
     })
 
+    # Create reference line for Q-Q plot (45-degree line)
+    qq_reference_line = alt.Chart(pd.DataFrame({
+        'Theoretical Quantiles': [-3, 3],  # Typical range for normal quantiles
+        'Standardized Residuals': [-3, 3]
+    })).mark_line(color='red', strokeDash=[5, 5]).encode(
+        x='Theoretical Quantiles',
+        y='Standardized Residuals'
+    )
+
     # Q-Q Plot
     qq_plot = alt.Chart(qq_df).mark_circle(size=60).encode(
         x=alt.X('Theoretical Quantiles', title='Theoretical Quantiles'),
         y=alt.Y('Standardized Residuals', title='Standardized Residuals')
-    ).properties(title="Q-Q Plot", width=300, height=300)
+    ).properties(title="Q-Q Plot", width=300, height=300) + qq_reference_line
 
     # Residuals vs Fitted Values data frame
     residuals_df = pd.DataFrame({
@@ -79,11 +89,21 @@ def qq_and_residuals_plot(y_actual, y_predicted, concatenate=True):
         'Residuals': residuals
     })
 
+    # Create horizontal reference line at y = 0 for Residuals vs. Fitted Values
+    residuals_reference_line = alt.Chart(pd.DataFrame({
+        'Fitted Values': [y_predicted.min() - 2, y_predicted.max() + 2], #edited starting point
+        'Residuals': [0, 0]
+    })).mark_line(color='red', strokeDash=[5, 5]).encode(
+        x='Fitted Values',
+        y='Residuals'
+    )
+
     # Residuals vs Fitted Values Plot
     residuals_plot = alt.Chart(residuals_df).mark_circle(size=60).encode(
         x=alt.X('Fitted Values', title='Fitted Values'),
         y=alt.Y('Residuals', title='Residuals')
-    ).properties(title="Residuals vs. Fitted Values", width=300, height=300)
+    ).properties(title="Residuals vs. Fitted Values", width=300, height=300) + residuals_reference_line
+
 
     # Combine or return separately
     if concatenate:
