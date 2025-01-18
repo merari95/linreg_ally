@@ -33,7 +33,7 @@ def check_multicollinearity(train_df: pd.DataFrame, threshold = None, vif_only =
 
     Examples
     --------
-    >>> from linreg_ally import check_multicollinearity
+    >>> from linreg_ally.multicollinearity import check_multicollinearity
     >>> vif_df, corr_chart = check_multicollinearity(train_df)
     >>> vif_df = check_multicollinearity(train_df, threshold = 5, vif_only = True)  
     """
