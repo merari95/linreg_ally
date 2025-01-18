@@ -1,4 +1,13 @@
-def run_linear_regression(dataframe):
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.compose import make_column_transformer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import get_scorer, get_scorer_names
+
+def run_linear_regression(dataframe, target_column, numeric_feats, categorical_feats, drop_feats=None, test_size=0.2, random_state=None, scoring_metrics=['r2', 'neg_mean_squared_error']):
     """
     Performs linear regression with preprocessing using sklearn and outputs evaluation scoring metrics.
     
@@ -19,7 +28,7 @@ def run_linear_regression(dataframe):
     random_state: `int`, optional
         controls the shuffling applied to the data before the split (default None).
     scoring_metrics: `list`, optional
-        scoring metrics to evaluate the model (default 'r2', 'mean_squared_error').
+        scoring metrics to evaluate the model (default 'r2', 'neg_mean_squared_error').
     
     Returns
     -------
@@ -44,9 +53,66 @@ def run_linear_regression(dataframe):
     >>> categorical_feats = ['category']
     >>> drop_feats = []
     >>> best_model, X_train, X_test, y_train, y_test, scores = run_linear_regression(
-    ...     df, target_column, numeric_feats, categorical_feats, drop_feats, metrics=['r2', 'mean_squared_error']
+    ...     df, target_column, numeric_feats, categorical_feats, drop_feats, scoring_metrics=['r2', 'neg_mean_squared_error']
     ... )
     >>> scores
-    {'r2': 0.52, 'mean_squared_error': 1.23}
+    {'r2': 0.52, 'neg_mean_squared_error': 1.23}
     """
-    pass
+
+    if not isinstance(dataframe, pd.DataFrame):
+        raise TypeError("dataframe must be a pandas DataFrame.")
+    
+    if dataframe.shape[1] <= 1:
+        raise ValueError("dataframe must contain more than one column.")
+    
+    if target_column not in dataframe.columns:
+        raise ValueError(f"target_column '{target_column}' is not in the dataframe.")
+    
+    if not (0.0 < test_size < 1.0):
+        raise ValueError("test_size must be between 0.0 and 1.0.")
+    
+    if random_state is not None and not isinstance(random_state, int):
+        raise TypeError("random_state must be an integer.")
+    
+    if not isinstance(scoring_metrics, list) or not all(isinstance(metric, str) for metric in scoring_metrics):
+        raise TypeError("scoring_metrics must be a list of strings.")
+    
+    if not all(metric in get_scorer_names() for metric in scoring_metrics):
+        invalid_metrics = [metric for metric in scoring_metrics if metric not in get_scorer_names()]
+        raise ValueError(f"The following scoring metrics are not valid: {', '.join(invalid_metrics)}")
+    
+    drop_feats = drop_feats if drop_feats is not None else []
+
+    X = dataframe.drop(columns=[target_column])
+    y = dataframe[target_column]
+
+    preprocessor = make_column_transformer(
+        (StandardScaler(), numeric_feats),
+        (OneHotEncoder(), categorical_feats),
+        ('drop', drop_feats)
+    )
+
+    pipe = Pipeline([
+        ('preprocessor', preprocessor),
+        ('model', LinearRegression())
+    ])
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
+
+    pipe.fit(X_train, y_train)
+
+    best_model = pipe
+
+    predictions = best_model.predict(X_test)
+
+    scores = {}
+    for metric in scoring_metrics:
+        scorer = get_scorer(metric)
+        scores[metric] = scorer._score_func(y_test, predictions)
+
+    print("Model Summary")
+    print("------------------------")
+    for metric, score in scores.items():
+        print(f"Test {metric}: {score:.3f}")
+
+    return best_model, X_train, X_test, y_train, y_test, scores
