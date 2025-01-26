@@ -1,5 +1,7 @@
 # linreg_ally
 
+[![Documentation Status](https://readthedocs.org/projects/linreg-ally/badge/?version=latest)](https://linreg-ally.readthedocs.io/en/latest/?badge=latest)
+
 ## Overview of linreg_ally package:	 
 
 This project delivers a Python package designed to help users determine if Ordinary Least Squares (“OLS”) regression is an appropriate model for their data. The package automates key steps, including performing OLS regression, data formatting checks, assumption validation, and multicollinearity detection, ensuring the data meets the prerequisites for a reliable model. By simplifying these essential tasks and providing clear diagnostics, the package empowers users to confidently assess the feasibility of linear regression and build accurate predictive models. 
