@@ -28,7 +28,7 @@ $ pip install linreg_ally
 
 ## Usage
 
-- TODO
+Visit our [read the docs page](https://linreg-ally.readthedocs.io/en/latest/example.html) to see individual function usage.
 
 ## Contributing
 
