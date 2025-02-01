@@ -38,6 +38,13 @@ def run_linear_regression(dataframe, target_column, numeric_feats, categorical_f
         Series for the training and test labels
         dictionary of metric scores with metric names as keys
     
+    Raises
+    ------
+    ValueError
+        When `dataframe`, `target_column`, `test_size` or `scoring_metrics` is not within the range of acceptable values
+    TypeError
+        When `dataframe`, `random_state` or `scoring_metrics` is not the expected type
+    
     Examples
     ---------
     >>> import pandas as pd
@@ -86,11 +93,7 @@ def run_linear_regression(dataframe, target_column, numeric_feats, categorical_f
     X = dataframe.drop(columns=[target_column])
     y = dataframe[target_column]
 
-    preprocessor = make_column_transformer(
-        (StandardScaler(), numeric_feats),
-        (OneHotEncoder(), categorical_feats),
-        ('drop', drop_feats)
-    )
+    preprocessor = preprocess(numeric_feats, categorical_feats, drop_feats)
 
     pipe = Pipeline([
         ('preprocessor', preprocessor),
@@ -99,9 +102,26 @@ def run_linear_regression(dataframe, target_column, numeric_feats, categorical_f
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
 
-    pipe.fit(X_train, y_train)
+    (best_model, scores) = fit_predict(pipe, X_train, X_test, y_train, y_test, scoring_metrics)
 
-    best_model = pipe
+    print("Model Summary")
+    print("------------------------")
+    for metric, score in scores.items():
+        print(f"Test {metric}: {score:.3f}")
+
+    return best_model, X_train, X_test, y_train, y_test, scores
+
+def preprocess(numeric_feats, categorical_feats, drop_feats):
+    return make_column_transformer(
+        (StandardScaler(), numeric_feats),
+        (OneHotEncoder(), categorical_feats),
+        ('drop', drop_feats)
+    )
+
+def fit_predict(pipeline, X_train, X_test, y_train, y_test, scoring_metrics):
+    pipeline.fit(X_train, y_train)
+
+    best_model = pipeline
 
     predictions = best_model.predict(X_test)
 
@@ -110,9 +130,4 @@ def run_linear_regression(dataframe, target_column, numeric_feats, categorical_f
         scorer = get_scorer(metric)
         scores[metric] = scorer._score_func(y_test, predictions)
 
-    print("Model Summary")
-    print("------------------------")
-    for metric, score in scores.items():
-        print(f"Test {metric}: {score:.3f}")
-
-    return best_model, X_train, X_test, y_train, y_test, scores
+    return (best_model, scores)
