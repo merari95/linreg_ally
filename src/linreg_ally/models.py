@@ -38,6 +38,13 @@ def run_linear_regression(dataframe, target_column, numeric_feats, categorical_f
         Series for the training and test labels
         dictionary of metric scores with metric names as keys
     
+    Raises
+    ------
+    ValueError
+        When `dataframe`, `target_column`, `test_size` or `scoring_metrics` is not within the range of acceptable values
+    TypeError
+        When `dataframe`, `random_state` or `scoring_metrics` is not the expected type
+    
     Examples
     ---------
     >>> import pandas as pd
