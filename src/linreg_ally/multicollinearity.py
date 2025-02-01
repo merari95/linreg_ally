@@ -63,7 +63,8 @@ def check_multicollinearity(train_df: pd.DataFrame, threshold = None, vif_only =
         x='level_0',
         y='level_1',
         size='corr',
-        color='corr'
+        color='corr',
+        tooltip=['level_0', 'level_1', 'corr'] 
     )
 
     # Filter VIF dataframe by the threshold if provided
