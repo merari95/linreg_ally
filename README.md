@@ -37,7 +37,7 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 
 ## License
 
-`linreg_ally` was created by Paramveer Singh, Merari Santana-Carbajal, Cheng Zhang, Alex Wong. It is licensed under the terms of the MIT license.
+`linreg_ally` was created by Paramveer Singh, Merari Santana-Carbajal, Cheng Zhang, and Alex Wong. It is licensed under the terms of the MIT license.
 
 ## Credits
 
