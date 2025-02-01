@@ -8,13 +8,14 @@ This project delivers a Python package designed to help users determine if Ordin
 
 ## Functions in linreg_ally package: 
 
-1. `run_linear_regression`: This function performs linear regression with preprocessing using sklearn and outputs evaluation scoring metrics. 
+1. `eda_summary`: This function uses the training set to check whether the data is formatted correctly to even run a linear regression model and returns a chart that shows the distribution of various features. 
 
-2. `eda_summary`: This function uses the training set to check whether the data is formatted correctly to even run a linear regression model and returns a chart that shows the distribution of various features. 
+2. `check_multicollinearity`: This function detects multicollinearity in the training dataset by computing the variance inflation factor (‘VIF’) and pairwise Pearson Correlation for each numeric feature.  
 
-3. `qq_and_residuals_plot`: This function tests the normality of residuals and homoscedasticity assumptions for a linear regression model by creating the Q-Q and Residuals vs Fitted Values plots, respectively. 
+3. `run_linear_regression`: This function performs linear regression with preprocessing using sklearn and outputs evaluation scoring metrics. 
 
-4. `check_multicollinearity`: This function detects multicollinearity in the training dataset by computing the variance inflation factor (‘VIF’) and pairwise Pearson Correlation for each numeric feature.  
+4. `qq_and_residuals_plot`: This function tests the normality of residuals and homoscedasticity assumptions for a linear regression model by creating the Q-Q and Residuals vs Fitted Values plots, respectively. 
+
 
 ## How package fits in Python Ecosystem 
 
