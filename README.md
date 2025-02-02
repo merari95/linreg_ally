@@ -29,7 +29,31 @@ $ pip install linreg_ally
 
 ## Usage
 
-Visit our [read the docs page](https://linreg-ally.readthedocs.io/en/latest/example.html) to see individual function usage.
+To use this package:
+
+- Install the package via poetry, run the following command from the root directory of this repo. If poetry hasn't been set up yet, please following this [link](https://python-poetry.org/docs/) for installtion.
+
+```bash
+poetry install
+```
+
+- Import the required functions from the package
+
+```python
+import linreg_ally
+from linreg_ally.eda import eda_summary
+from linreg_ally.multicollinearity import check_multicollinearity
+from linreg_ally.models import run_linear_regression
+from linreg_ally.plotting import qq_and_residuals_plot
+```
+- For individual function usage, visit our [read the docs page](https://linreg-ally.readthedocs.io/en/latest/example.html) to see individual function usage.
+
+To run the tests, run the following commands from the root directory of this repo:
+
+
+```bash
+pytest tests/
+```
 
 ## Contributing
 
