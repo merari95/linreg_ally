@@ -37,8 +37,8 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 
 ## License
 
-`linreg_ally` was created by Paramveer Singh, Merari Santana-Carbajal, Cheng Zhang, and Alex Wong. It is licensed under the terms of the MIT license.
+linreg_ally was created by Paramveer Singh, Merari Santana-Carbajal, Cheng Zhang, and Alex Wong. It is licensed under the terms of the MIT license.
 
 ## Credits
 
-`linreg_ally` was created with [`cookiecutter`](https://cookiecutter.readthedocs.io/en/latest/) and the `py-pkgs-cookiecutter` [template](https://github.com/py-pkgs/py-pkgs-cookiecutter).
+linreg_ally was created with [`cookiecutter`](https://cookiecutter.readthedocs.io/en/latest/) and the `py-pkgs-cookiecutter` [template](https://github.com/py-pkgs/py-pkgs-cookiecutter).
