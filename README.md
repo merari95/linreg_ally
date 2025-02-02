@@ -1,6 +1,8 @@
 # linreg_ally
 
 [![Documentation Status](https://readthedocs.org/projects/linreg-ally/badge/?version=latest)](https://linreg-ally.readthedocs.io/en/latest/?badge=latest)
+[![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-31111/)
+[![codecov](https://codecov.io/gh/UBC-MDS/linreg_ally/graph/badge.svg?token=JfomN9gPnY)](https://codecov.io/gh/UBC-MDS/linreg_ally)
 
 ## Overview of linreg_ally package:	 
 
