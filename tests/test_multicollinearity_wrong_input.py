@@ -19,13 +19,25 @@ data_numeric_only = {
     #"Feature_4": ['a', 'b', 'c', 'd', 'e']   # string column
 }
 
+list_data = [1, 2, 3, 4, 5]
+
 train_df_with_str = pd.DataFrame(data_with_str)
 train_df_numeric_only = pd.DataFrame(data_numeric_only)
 
-def test_function_output_incorrect_dtype():
+def test_list_as_function_input():
+    """
+    Test when input is not a dataframe. 
+    """
+    with pytest.raises(TypeError):
+        check_multicollinearity(list_data) 
+
+
+def test_dataframe_with_str_column():
+    """
+    Test when input dataframe has a column with str datatype. 
+    """
 
     vif_df = check_multicollinearity(train_df_with_str, vif_only=True) 
-
 
     vif_df_len = 3 
     vif_column_type = 'float64'

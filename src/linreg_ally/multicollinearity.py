@@ -31,12 +31,20 @@ def check_multicollinearity(train_df: pd.DataFrame, threshold = None, vif_only =
     alt.Chart
         A chart that shows the pairwise Pearson Correlations of all numeric columns in train_df. 
 
+    Raises
+    ------
+    TypeError
+        If `train_df` is not a pandas DataFrame.
+
     Examples
     --------
     >>> from linreg_ally.multicollinearity import check_multicollinearity
     >>> vif_df, corr_chart = check_multicollinearity(train_df)
     >>> vif_df = check_multicollinearity(train_df, threshold = 5, vif_only = True)  
     """
+    if not isinstance(train_df, pd.DataFrame):
+        raise TypeError(f"Expect train_df to be a pd.Dataframe but got {type(train_df)}")
+    
     # select only numeric columns in train_df
     train_df_numeric_only = train_df.select_dtypes(include='number')
 
@@ -63,7 +71,8 @@ def check_multicollinearity(train_df: pd.DataFrame, threshold = None, vif_only =
         x='level_0',
         y='level_1',
         size='corr',
-        color='corr'
+        color='corr',
+        tooltip=['level_0', 'level_1', 'corr'] 
     )
 
     # Filter VIF dataframe by the threshold if provided

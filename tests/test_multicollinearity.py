@@ -14,7 +14,9 @@ data = {
 train_df = pd.DataFrame(data)
 
 def test_function_output_with_perfect_correlation():
-
+    """
+    Test use case when train data has perfect and moderate correlation.
+    """
     vif_df, corr_chart = check_multicollinearity(train_df) 
 
     vif_df_len = 4 
@@ -32,6 +34,9 @@ def test_function_output_with_perfect_correlation():
     assert corr_chart.encoding.size.shorthand == 'corr'
 
 def test_vif_value(): 
+    """
+    Test VIF values in vif_df created by the function. 
+    """
     vif_df = check_multicollinearity(train_df, vif_only=True) 
 
     vif_0 = variance_inflation_factor(train_df, 0)
@@ -45,6 +50,9 @@ def test_vif_value():
     assert vif_df.iloc[3,1] == vif_3   
 
 def test_threshold():
+    """
+    Test if VIF values in vif_df are greater than or equal to the specified threshold.
+    """
     vif_df = check_multicollinearity(train_df, threshold=15, vif_only=True)
     threshold = 15
 
