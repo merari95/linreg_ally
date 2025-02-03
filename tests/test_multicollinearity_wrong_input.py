@@ -24,7 +24,7 @@ list_data = [1, 2, 3, 4, 5]
 train_df_with_str = pd.DataFrame(data_with_str)
 train_df_numeric_only = pd.DataFrame(data_numeric_only)
 
-def test_function_output_incorrect_dtype():
+def test_list_as_function_input():
     """
     Test when input is not a dataframe. 
     """
@@ -32,7 +32,7 @@ def test_function_output_incorrect_dtype():
         check_multicollinearity(list_data) 
 
 
-def test_function_output_incorrect_dtype():
+def test_dataframe_with_str_column():
     """
     Test when input dataframe has a column with str datatype. 
     """
