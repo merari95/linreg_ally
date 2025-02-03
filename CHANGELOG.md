@@ -1,6 +1,26 @@
 # CHANGELOG
 
 
+## v0.0.2 (2025-02-03)
+
+### Bug Fixes
+
+- Added docstring re: TypeError
+  ([`96a511f`](https://github.com/UBC-MDS/linreg_ally/commit/96a511fc8bdc2359b8fd9bdd13983b1b1999bcfd))
+
+- Addressed review comment on missing docstring
+  ([`9e0b537`](https://github.com/UBC-MDS/linreg_ally/commit/9e0b537e0068e1233607f98fb28af6d6dae6d6ee))
+
+- Addressed review comment on missing docstring
+  ([`66bbc60`](https://github.com/UBC-MDS/linreg_ally/commit/66bbc608a099909a1ee2cf06de380a66d033c5da))
+
+- Edit multicollinearity to check for incorrect datatype
+  ([`7f4755e`](https://github.com/UBC-MDS/linreg_ally/commit/7f4755ebe69f0fec0b21e4f16a05e0db98eac23f))
+
+- Edited function names to align to what they are testing
+  ([`dd5f0ed`](https://github.com/UBC-MDS/linreg_ally/commit/dd5f0ed0b745b7133cf3e5cd8854514ea918ad81))
+
+
 ## v0.0.1 (2025-02-02)
 
 ### Bug Fixes
