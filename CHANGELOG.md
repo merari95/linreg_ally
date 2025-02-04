@@ -1,6 +1,17 @@
 # CHANGELOG
 
 
+## v0.0.3 (2025-02-04)
+
+### Bug Fixes
+
+- Update to stable version and update author names
+  ([`220fb3c`](https://github.com/UBC-MDS/linreg_ally/commit/220fb3cfa744ea3921aee9d418a56a9884f04776))
+
+- Update version number to account for missed version bumps
+  ([`6e92a32`](https://github.com/UBC-MDS/linreg_ally/commit/6e92a324ce6a78bdb57bf2a1f7a69847099d7c76))
+
+
 ## v0.0.2 (2025-02-03)
 
 ### Bug Fixes
