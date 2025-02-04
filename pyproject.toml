@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "linreg_ally"
-version = "0.0.2"
+version = "1.1.0"
 description = "A package to test linearity assumptions to determine whether a linear regression model is good or not"
-authors = ["Paramveer, Merari, Cheng, Alex"]
+authors = ["Paramveer Singh", "Merari Santana-Carbajal", "Cheng Zhang", "Alex Wong"]
 license = "MIT"
 readme = "README.md"
 
