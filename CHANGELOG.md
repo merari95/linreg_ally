@@ -1,18 +1,7 @@
 # CHANGELOG
 
 
-## v0.0.3 (2025-02-04)
-
-### Bug Fixes
-
-- Update to stable version and update author names
-  ([`220fb3c`](https://github.com/UBC-MDS/linreg_ally/commit/220fb3cfa744ea3921aee9d418a56a9884f04776))
-
-- Update version number to account for missed version bumps
-  ([`6e92a32`](https://github.com/UBC-MDS/linreg_ally/commit/6e92a324ce6a78bdb57bf2a1f7a69847099d7c76))
-
-
-## v0.0.2 (2025-02-03)
+## v0.0.1 (2025-02-04)
 
 ### Bug Fixes
 
@@ -30,11 +19,6 @@
 
 - Edited function names to align to what they are testing
   ([`dd5f0ed`](https://github.com/UBC-MDS/linreg_ally/commit/dd5f0ed0b745b7133cf3e5cd8854514ea918ad81))
-
-
-## v0.0.1 (2025-02-02)
-
-### Bug Fixes
 
 - Feedback addresed by deleting empty linreg_ally.py file
   ([`20ff3ca`](https://github.com/UBC-MDS/linreg_ally/commit/20ff3ca0b4b485203e2d7f687bbc3f650cdef12f))
@@ -63,6 +47,15 @@
 
 - Feedback addressed to remove quotation marks from "linreg_ally"
   ([`a9ab225`](https://github.com/UBC-MDS/linreg_ally/commit/a9ab225c6d430777a760f30accd0ee56bd0df542))
+
+- Update to stable version and update author names
+  ([`220fb3c`](https://github.com/UBC-MDS/linreg_ally/commit/220fb3cfa744ea3921aee9d418a56a9884f04776))
+
+- Update version number to account for missed version bumps
+  ([`6e92a32`](https://github.com/UBC-MDS/linreg_ally/commit/6e92a324ce6a78bdb57bf2a1f7a69847099d7c76))
+
+- Update versioning to test again
+  ([`c40fd8a`](https://github.com/UBC-MDS/linreg_ally/commit/c40fd8abbb9a9b926f46713a4ef5816221efb333))
 
 ### Build System
 
